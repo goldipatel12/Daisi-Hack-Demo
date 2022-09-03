@@ -4,7 +4,7 @@ from copy import deepcopy
 
 def compute_deriv(image = None):
     '''
-    Computean edge image (the second derivative of smoothed spline)
+    Compute an edge image (the second derivative of a smoothed spline)
 
     Arguments:
     - image (2D Numpy array) : grayscale image
@@ -21,7 +21,7 @@ def compute_deriv(image = None):
     deriv = (signal.sepfir2d(ck, derfilt, [1]) +
                 signal.sepfir2d(ck, [1], derfilt))
 
-    #   Post processing the image
+    # Post processing the image
     final = deepcopy(deriv)
     final = 1 - final
     threshold = 0.1
@@ -29,11 +29,3 @@ def compute_deriv(image = None):
     final[final < threshold] = 0
 
     return final
-
-if __name__ == "__main__":
-    edge_image = compute_deriv()
-
-    import matplotlib.pyplot as plt 
-
-    plt.imshow(edge_image)
-    plt.show()
