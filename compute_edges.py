@@ -29,11 +29,3 @@ def compute_deriv(image = None):
     final[final < threshold] = 0
 
     return final
-
-if __name__ == "__main__":
-    edge_image = compute_deriv()
-
-    import matplotlib.pyplot as plt 
-
-    plt.imshow(edge_image)
-    plt.show()
