@@ -1,6 +1,8 @@
 import numpy as np
 from scipy import signal, misc
 from copy import deepcopy
+import scipy
+from summary import *
 
 def compute_deriv(image = None):
     '''
