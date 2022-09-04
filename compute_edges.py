@@ -1,8 +1,11 @@
 import numpy as np
 from scipy import signal, misc
 from copy import deepcopy
+import streamlit as st
+from PIL import Image, ImageOps
 import scipy
 from summary import *
+
 
 def compute_deriv(image = None):
     '''
@@ -23,7 +26,7 @@ def compute_deriv(image = None):
     deriv = (signal.sepfir2d(ck, derfilt, [1]) +
                 signal.sepfir2d(ck, [1], derfilt))
 
-    # Post processing the image
+    
     final = deepcopy(deriv)
     final = 1 - final
     threshold = 0.1
@@ -32,8 +35,6 @@ def compute_deriv(image = None):
 
     return final
 
-import streamlit as st
-from PIL import Image, ImageOps
 
 def st_ui():
     '''
@@ -43,6 +44,9 @@ def st_ui():
     
     st.set_page_config(layout = "wide")
     st.title("Compute edges")
+
+    with st.expander("Summary"):
+        st.markdown(get_summary())
 
     user_image = st.sidebar.file_uploader("Load your own image")
     if user_image is not None:
@@ -64,3 +68,5 @@ def st_ui():
 
 if __name__ == "__main__":
     st_ui()
+
+
